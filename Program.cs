@@ -16,10 +16,13 @@ var app = builder.Build();
 var port=Environment.GetEnvironmentVariable("port") ?? "10000";
 app.Urls.Add($"http://0.0.0.0:{port}");
 // Middleware
-if (app.Environment.IsDevelopment())
+f (!app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // Do NOT call app.UseHttpsRedirection();
+}
+else
+{
+    app.UseHttpsRedirection();
 }
 
 app.UseHttpsRedirection();
